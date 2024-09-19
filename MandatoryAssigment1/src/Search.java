@@ -150,10 +150,10 @@ public class Search {
             Arrays.fill(text, '.');
             len = file.read(text);
 
-            file.close();
-
             if (file.read() >= 0)
                 System.out.println("\nWarning: file truncated to " + max + " characters\n");
+
+            file.close();
 
             if (ntasks <= 0 || nthreads <= 0 || pattern.length <= 0 || warmups < 0 || runs <= 0)
                 throw new Exception("Illegal argument(s)");
@@ -224,6 +224,7 @@ public class Search {
                     execMode == Mode.CACHED ? Executors.newCachedThreadPool() :
                             /* Mode.FIXED */ Executors.newFixedThreadPool(nthreads);
 
+
             /**********************************************
              * Run search using a single task
              *********************************************/
@@ -266,12 +267,16 @@ public class Search {
              * Run search using multiple tasks
              *********************************************/
 
-/*+++++++++ Uncomment for Problem 2+
 
             // Create list of tasks
             List<SearchTask> taskList = new ArrayList<SearchTask>();
 
-            // TODO: Add tasks to list here
+            for (int i = 0; i < ntasks; i++) {
+                int from = i * len / ntasks;
+                int to = (i + 1) * len / ntasks;
+                int realTo = Math.min(to + pattern.length - 1, len);
+                taskList.add(new SearchTask(text, pattern, from, realTo));
+            }
 
             List<Integer> result = null;
 
@@ -291,8 +296,7 @@ public class Search {
 
                 // Overall result is an ordered list of unique occurrence positions
                 result = new LinkedList<Integer>();
-
-                // TODO: Combine future results into an overall result
+                for (var future : futures) result.addAll(future.get()); 
 
                 time = (double) (System.nanoTime() - start) / 1e9;
                 totalTime += time;
@@ -311,7 +315,7 @@ public class Search {
             }
             System.out.printf("\n\nAverage speedup: %1.2f\n\n", singleTime / multiTime);
 
-++++++++++*/
+
 
             /**********************************************
              * Terminate engine after use
