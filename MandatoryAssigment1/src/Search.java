@@ -56,9 +56,7 @@ enum Mode {SINGLE, CACHED, FIXED};
 
 public class Search {
 
-    enum Mode {SINGLE, CACHED, FIXED}
-
-    ;
+    enum Mode {SINGLE, CACHED, FIXED};
 
     static final int max = 10000000;            // Max no. of chars searched
 
@@ -151,6 +149,8 @@ public class Search {
 
             Arrays.fill(text, '.');
             len = file.read(text);
+
+            file.close();
 
             if (file.read() >= 0)
                 System.out.println("\nWarning: file truncated to " + max + " characters\n");
