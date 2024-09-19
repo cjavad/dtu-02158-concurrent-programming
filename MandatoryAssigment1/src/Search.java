@@ -39,10 +39,8 @@ class SearchTask implements Callable<List<Integer>> {
         for (int i = from; i <= to - pl; i++) {
             boolean eq = true;
             for (int j = 0; j < pl; j++) {
-                if (text[i + j] != pattern[j]) {
+                if (text[i + j] != pattern[j])
                     eq = false; // We really should break here
-                    break;
-                }
             }
             if (eq)
                 result.add(i);
@@ -74,7 +72,7 @@ public class Search {
     static int warmups = 0;                     // No. of warmup searches
     static int runs = 1;                        // No. of search repetitions
     static String datafile;                    // Name of data file
-    static Mode execMode = Mode.SINGLE;         // Kind of executor   
+    static Mode execMode = Mode.SINGLE;         // Kind of executor
 
     static void getArguments(String[] argv) {
         // Reads arguments into static variables
@@ -94,13 +92,13 @@ public class Search {
                 }
 
                 if (argv[i].equals("-R")) {
-                    runs = Integer.parseInt(argv[i + 1]);
+                    runs = Integer.valueOf(argv[i + 1]);
                     i += 2;
                     continue;
                 }
 
                 if (argv[i].equals("-W")) {
-                    warmups = Integer.parseInt(argv[i + 1]);
+                    warmups = Integer.valueOf(argv[i + 1]);
                     i += 2;
                     continue;
                 }
@@ -135,12 +133,12 @@ public class Search {
                 i += 2;
 
                 if (argv.length > i) {
-                    ntasks = Integer.parseInt(argv[i]);
+                    ntasks = Integer.valueOf(argv[i]);
                     i++;
                 }
 
                 if (argv.length > i) {
-                    nthreads = Integer.parseInt(argv[i]);
+                    nthreads = Integer.valueOf(argv[i]);
                     i++;
                 }
 
@@ -176,7 +174,7 @@ public class Search {
     }
 
     static void writeResult(List<Integer> res) {
-        System.out.print(res.size() + " occurrences found in ");
+        System.out.print("" + res.size() + " occurrences found in ");
         if (printPos) {
             int i = 0;
             System.out.println();
@@ -268,22 +266,22 @@ public class Search {
              * Run search using multiple tasks
              *********************************************/
 
-/*+++++++++ Uncomment for Problem 2+ 
-         
+/*+++++++++ Uncomment for Problem 2+
+
             // Create list of tasks
             List<SearchTask> taskList = new ArrayList<SearchTask>();
-            
+
             // TODO: Add tasks to list here
 
             List<Integer> result = null;
-            
+
             // Run the tasks a couple of times
             for (int i = 0; i < warmups; i++) {
                 engine.invokeAll(taskList);
             }
-            
+
             totalTime = 0.0;
-            
+
             for (int run = 0; run < runs; run++) {
 
                 start = System.nanoTime();
@@ -293,21 +291,21 @@ public class Search {
 
                 // Overall result is an ordered list of unique occurrence positions
                 result = new LinkedList<Integer>();
-                
-                // TODO: Combine future results into an overall result 
+
+                // TODO: Combine future results into an overall result
 
                 time = (double) (System.nanoTime() - start) / 1e9;
-                totalTime += time;    
-                
+                totalTime += time;
+
                 System.out.printf("\nUsing %2d tasks: ", ntasks);
                 writeRun(run);  writeResult(result);  writeTime(time);
             }
 
             double multiTime = totalTime / runs;
-            System.out.printf("\n\nUsing %2d tasks (avg.): ", ntasks); 
+            System.out.printf("\n\nUsing %2d tasks (avg.): ", ntasks);
             writeTime(multiTime);  System.out.println();
 
-            
+
             if (!singleResult.equals(result)) {
                 System.out.println("\nERROR: lists differ");
             }
