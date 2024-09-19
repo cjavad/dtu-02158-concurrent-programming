@@ -39,8 +39,10 @@ class SearchTask implements Callable<List<Integer>> {
         for (int i = from; i <= to - pl; i++) {
             boolean eq = true;
             for (int j = 0; j < pl; j++) {
-                if (text[i + j] != pattern[j])
+                if (text[i + j] != pattern[j]) {
                     eq = false; // We really should break here
+                    break;
+                }
             }
             if (eq)
                 result.add(i);
@@ -92,13 +94,13 @@ public class Search {
                 }
 
                 if (argv[i].equals("-R")) {
-                    runs = Integer.valueOf(argv[i + 1]);
+                    runs = Integer.parseInt(argv[i + 1]);
                     i += 2;
                     continue;
                 }
 
                 if (argv[i].equals("-W")) {
-                    warmups = Integer.valueOf(argv[i + 1]);
+                    warmups = Integer.parseInt(argv[i + 1]);
                     i += 2;
                     continue;
                 }
@@ -133,12 +135,12 @@ public class Search {
                 i += 2;
 
                 if (argv.length > i) {
-                    ntasks = Integer.valueOf(argv[i]);
+                    ntasks = Integer.parseInt(argv[i]);
                     i++;
                 }
 
                 if (argv.length > i) {
-                    nthreads = Integer.valueOf(argv[i]);
+                    nthreads = Integer.parseInt(argv[i]);
                     i++;
                 }
 
@@ -174,7 +176,7 @@ public class Search {
     }
 
     static void writeResult(List<Integer> res) {
-        System.out.print("" + res.size() + " occurrences found in ");
+        System.out.print(res.size() + " occurrences found in ");
         if (printPos) {
             int i = 0;
             System.out.println();
