@@ -106,3 +106,7 @@ Mobile Ryzen 9 5900HX 8/16 3.3 GHz (4.6 GHz)
 ![](./images/problem-4-speedup.png)
 
 ## Problem 5
+
+Ran on 48-core HPC node.
+
+![](./images/problem-5-speedup.png)
