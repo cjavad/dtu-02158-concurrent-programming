@@ -103,4 +103,6 @@ Mobile Ryzen 9 5900HX 8/16 3.3 GHz (4.6 GHz)
 
 ## Problem 4
 
+![](./images/problem-4-speedup.png)
+
 ## Problem 5

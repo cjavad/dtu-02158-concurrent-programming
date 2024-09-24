@@ -6,12 +6,19 @@ RUNS=50
 
 # Change these.
 PATTERN="world"
-TASKS=64
-THREADS=16
+TASKS=1
+THREADS=1
 FILE=./data/100-0.txt
 
-IFS=$'\n' data=( $(./search -Ef -W $WARMUPS -R $RUNS $FILE $PATTERN $TASKS $THREADS) )
+# Allow task and threads to come from command line
+if [ "$#" -eq 2 ]; then
+    TASKS=$1
+    THREADS=$2
+fi
 
+echo "Running with $TASKS tasks and $THREADS threads in Fixed Mode"
+
+IFS=$'\n' data=( $(./search -Ef -W $WARMUPS -R $RUNS $FILE $PATTERN $TASKS $THREADS) )
 
 truncate -s 0 single.txt
 truncate -s 0 multi.txt
@@ -42,7 +49,7 @@ do
 
     # Parse line: Average speedup: 5,05
     if [[ $i == *"Average speedup:"* ]]; then
-        echo "$PATTERN $FILE $TASKS $THREADS" $(echo -n $i | awk '{ print $3  }' | tr -d ':' | tr ',' '.') >> speedup.txt
+        echo "$TASKS $THREADS" $(echo -n $i | awk '{ print $3  }' | tr -d ':' | tr ',' '.') >> speedup.txt
     fi
 
 done
