@@ -302,5 +302,5 @@ hardware components that the CPU schedules and manages for us.
 
 In general splitting our task up into parallel chunks allowed it to use more of the physical resources at once but not
 quite beyond that. It also seems that giving the CPU / OS more work to do lead to more work being done, although we
-cannot conclude this will continue indefinitely, preventing thread starvation by slightly overworking the threads before
-getting throttled seems to provide the best performance. 
+cannot conclude this will continue indefinitely. Having more tasks than threads seemed to give the best performance by 
+distributing work based on which threads were currently running and had no work to do.
