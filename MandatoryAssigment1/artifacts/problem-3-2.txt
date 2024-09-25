@@ -1,0 +1,109 @@
+Running with 2 tasks and 2 threads in Fixed Mode
+~/School/concurrent/dtu-02158-concurrent-programming/MandatoryAssigment1/src ~/School/concurrent/dtu-02158-concurrent-programming/MandatoryAssigment1
+~/School/concurrent/dtu-02158-concurrent-programming/MandatoryAssigment1
+File=./data/100-0.txt, length=5555534, pattern='world'
+ntasks=2, nthreads=2, warmups=25, runs=50
+executor: CACHED
+Single task: Run no.  0: 760 occurrences found in 0,042862 s
+Single task: Run no.  1: 760 occurrences found in 0,044597 s
+Single task: Run no.  2: 760 occurrences found in 0,045626 s
+Single task: Run no.  3: 760 occurrences found in 0,041527 s
+Single task: Run no.  4: 760 occurrences found in 0,044938 s
+Single task: Run no.  5: 760 occurrences found in 0,039375 s
+Single task: Run no.  6: 760 occurrences found in 0,036790 s
+Single task: Run no.  7: 760 occurrences found in 0,035939 s
+Single task: Run no.  8: 760 occurrences found in 0,037675 s
+Single task: Run no.  9: 760 occurrences found in 0,039325 s
+Single task: Run no. 10: 760 occurrences found in 0,039804 s
+Single task: Run no. 11: 760 occurrences found in 0,038893 s
+Single task: Run no. 12: 760 occurrences found in 0,039970 s
+Single task: Run no. 13: 760 occurrences found in 0,041296 s
+Single task: Run no. 14: 760 occurrences found in 0,041045 s
+Single task: Run no. 15: 760 occurrences found in 0,039427 s
+Single task: Run no. 16: 760 occurrences found in 0,039379 s
+Single task: Run no. 17: 760 occurrences found in 0,039651 s
+Single task: Run no. 18: 760 occurrences found in 0,038910 s
+Single task: Run no. 19: 760 occurrences found in 0,039474 s
+Single task: Run no. 20: 760 occurrences found in 0,039354 s
+Single task: Run no. 21: 760 occurrences found in 0,038447 s
+Single task: Run no. 22: 760 occurrences found in 0,039290 s
+Single task: Run no. 23: 760 occurrences found in 0,039114 s
+Single task: Run no. 24: 760 occurrences found in 0,039937 s
+Single task: Run no. 25: 760 occurrences found in 0,038675 s
+Single task: Run no. 26: 760 occurrences found in 0,037375 s
+Single task: Run no. 27: 760 occurrences found in 0,037405 s
+Single task: Run no. 28: 760 occurrences found in 0,037414 s
+Single task: Run no. 29: 760 occurrences found in 0,038310 s
+Single task: Run no. 30: 760 occurrences found in 0,038939 s
+Single task: Run no. 31: 760 occurrences found in 0,039282 s
+Single task: Run no. 32: 760 occurrences found in 0,039605 s
+Single task: Run no. 33: 760 occurrences found in 0,038467 s
+Single task: Run no. 34: 760 occurrences found in 0,040103 s
+Single task: Run no. 35: 760 occurrences found in 0,040290 s
+Single task: Run no. 36: 760 occurrences found in 0,039692 s
+Single task: Run no. 37: 760 occurrences found in 0,038972 s
+Single task: Run no. 38: 760 occurrences found in 0,038915 s
+Single task: Run no. 39: 760 occurrences found in 0,040782 s
+Single task: Run no. 40: 760 occurrences found in 0,039456 s
+Single task: Run no. 41: 760 occurrences found in 0,040201 s
+Single task: Run no. 42: 760 occurrences found in 0,039297 s
+Single task: Run no. 43: 760 occurrences found in 0,039761 s
+Single task: Run no. 44: 760 occurrences found in 0,040628 s
+Single task: Run no. 45: 760 occurrences found in 0,042561 s
+Single task: Run no. 46: 760 occurrences found in 0,038946 s
+Single task: Run no. 47: 760 occurrences found in 0,040792 s
+Single task: Run no. 48: 760 occurrences found in 0,039381 s
+Single task: Run no. 49: 760 occurrences found in 0,039702 s
+Single task (avg.): 0,039752 s
+Using  2 tasks: Run no.  0: 760 occurrences found in 0,019930 s
+Using  2 tasks: Run no.  1: 760 occurrences found in 0,018756 s
+Using  2 tasks: Run no.  2: 760 occurrences found in 0,021181 s
+Using  2 tasks: Run no.  3: 760 occurrences found in 0,020557 s
+Using  2 tasks: Run no.  4: 760 occurrences found in 0,019957 s
+Using  2 tasks: Run no.  5: 760 occurrences found in 0,020957 s
+Using  2 tasks: Run no.  6: 760 occurrences found in 0,021154 s
+Using  2 tasks: Run no.  7: 760 occurrences found in 0,019936 s
+Using  2 tasks: Run no.  8: 760 occurrences found in 0,020122 s
+Using  2 tasks: Run no.  9: 760 occurrences found in 0,020661 s
+Using  2 tasks: Run no. 10: 760 occurrences found in 0,022376 s
+Using  2 tasks: Run no. 11: 760 occurrences found in 0,023430 s
+Using  2 tasks: Run no. 12: 760 occurrences found in 0,022166 s
+Using  2 tasks: Run no. 13: 760 occurrences found in 0,021127 s
+Using  2 tasks: Run no. 14: 760 occurrences found in 0,021749 s
+Using  2 tasks: Run no. 15: 760 occurrences found in 0,022097 s
+Using  2 tasks: Run no. 16: 760 occurrences found in 0,020972 s
+Using  2 tasks: Run no. 17: 760 occurrences found in 0,021224 s
+Using  2 tasks: Run no. 18: 760 occurrences found in 0,022530 s
+Using  2 tasks: Run no. 19: 760 occurrences found in 0,020609 s
+Using  2 tasks: Run no. 20: 760 occurrences found in 0,020357 s
+Using  2 tasks: Run no. 21: 760 occurrences found in 0,020622 s
+Using  2 tasks: Run no. 22: 760 occurrences found in 0,021286 s
+Using  2 tasks: Run no. 23: 760 occurrences found in 0,021325 s
+Using  2 tasks: Run no. 24: 760 occurrences found in 0,020823 s
+Using  2 tasks: Run no. 25: 760 occurrences found in 0,020965 s
+Using  2 tasks: Run no. 26: 760 occurrences found in 0,021297 s
+Using  2 tasks: Run no. 27: 760 occurrences found in 0,022289 s
+Using  2 tasks: Run no. 28: 760 occurrences found in 0,021482 s
+Using  2 tasks: Run no. 29: 760 occurrences found in 0,021968 s
+Using  2 tasks: Run no. 30: 760 occurrences found in 0,021273 s
+Using  2 tasks: Run no. 31: 760 occurrences found in 0,021970 s
+Using  2 tasks: Run no. 32: 760 occurrences found in 0,023262 s
+Using  2 tasks: Run no. 33: 760 occurrences found in 0,021591 s
+Using  2 tasks: Run no. 34: 760 occurrences found in 0,022279 s
+Using  2 tasks: Run no. 35: 760 occurrences found in 0,021039 s
+Using  2 tasks: Run no. 36: 760 occurrences found in 0,021975 s
+Using  2 tasks: Run no. 37: 760 occurrences found in 0,022641 s
+Using  2 tasks: Run no. 38: 760 occurrences found in 0,021086 s
+Using  2 tasks: Run no. 39: 760 occurrences found in 0,021993 s
+Using  2 tasks: Run no. 40: 760 occurrences found in 0,022609 s
+Using  2 tasks: Run no. 41: 760 occurrences found in 0,022003 s
+Using  2 tasks: Run no. 42: 760 occurrences found in 0,020482 s
+Using  2 tasks: Run no. 43: 760 occurrences found in 0,020435 s
+Using  2 tasks: Run no. 44: 760 occurrences found in 0,022821 s
+Using  2 tasks: Run no. 45: 760 occurrences found in 0,023003 s
+Using  2 tasks: Run no. 46: 760 occurrences found in 0,022111 s
+Using  2 tasks: Run no. 47: 760 occurrences found in 0,021520 s
+Using  2 tasks: Run no. 48: 760 occurrences found in 0,021259 s
+Using  2 tasks: Run no. 49: 760 occurrences found in 0,022077 s
+Using  2 tasks (avg.): 0,021427 s
+Average speedup: 1,86

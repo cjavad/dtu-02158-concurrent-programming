@@ -1,5 +1,8 @@
 #!/bin/sh
 
+SCRIPTDIR=$(dirname $0)
+cd $SCRIPTDIR/../
+
 # These settings cannot be changed.
 WARMUPS=25
 RUNS=50
@@ -9,6 +12,7 @@ PATTERN="world"
 TASKS=1
 THREADS=1
 FILE=./data/100-0.txt
+EXECUTOR="-Ef"
 
 # Allow task and threads to come from command line
 if [ "$#" -eq 2 ]; then
@@ -16,9 +20,18 @@ if [ "$#" -eq 2 ]; then
     THREADS=$2
 fi
 
+# If we pass 5 arguments, we assume that the first argument is the file
+if [ "$#" -eq 5 ]; then
+    FILE=$1
+    PATTERN=$2
+    TASKS=$3
+    THREADS=$4
+    EXECUTOR=$5
+fi
+
 echo "Running with $TASKS tasks and $THREADS threads in Fixed Mode"
 
-IFS=$'\n' data=( $(./search -Ef -W $WARMUPS -R $RUNS $FILE $PATTERN $TASKS $THREADS) )
+IFS=$'\n' data=( $($SCRIPTDIR/search $EXECUTOR -W $WARMUPS -R $RUNS $FILE $PATTERN $TASKS $THREADS) )
 
 truncate -s 0 single.txt
 truncate -s 0 multi.txt
@@ -54,5 +67,5 @@ do
 
 done
 
-gnuplot -c plot.gp single.txt single_plot.png "Single task"
-gnuplot -c plot.gp multi.txt multi_plot.png "$TASKS tasks"
+gnuplot -c $SCRIPTDIR/plot.gp single.txt single_plot.png "Single task"
+gnuplot -c $SCRIPTDIR/plot.gp multi.txt multi_plot.png "$TASKS tasks"

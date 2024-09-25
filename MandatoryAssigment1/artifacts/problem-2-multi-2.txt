@@ -1,0 +1,109 @@
+Running with 2 tasks and 1 threads in Fixed Mode
+~/School/concurrent/dtu-02158-concurrent-programming/MandatoryAssigment1/src ~/School/concurrent/dtu-02158-concurrent-programming/MandatoryAssigment1
+~/School/concurrent/dtu-02158-concurrent-programming/MandatoryAssigment1
+File=./data/xtest.txt, length=6205, pattern='xxxx'
+ntasks=2, nthreads=1, warmups=25, runs=50
+executor: SINGLE
+Single task: Run no.  0: 2605 occurrences found in 0,000170 s
+Single task: Run no.  1: 2605 occurrences found in 0,000212 s
+Single task: Run no.  2: 2605 occurrences found in 0,000192 s
+Single task: Run no.  3: 2605 occurrences found in 0,000176 s
+Single task: Run no.  4: 2605 occurrences found in 0,000195 s
+Single task: Run no.  5: 2605 occurrences found in 0,000178 s
+Single task: Run no.  6: 2605 occurrences found in 0,000173 s
+Single task: Run no.  7: 2605 occurrences found in 0,000169 s
+Single task: Run no.  8: 2605 occurrences found in 0,000179 s
+Single task: Run no.  9: 2605 occurrences found in 0,000119 s
+Single task: Run no. 10: 2605 occurrences found in 0,000122 s
+Single task: Run no. 11: 2605 occurrences found in 0,000326 s
+Single task: Run no. 12: 2605 occurrences found in 0,000123 s
+Single task: Run no. 13: 2605 occurrences found in 0,000125 s
+Single task: Run no. 14: 2605 occurrences found in 0,000130 s
+Single task: Run no. 15: 2605 occurrences found in 0,000127 s
+Single task: Run no. 16: 2605 occurrences found in 0,000121 s
+Single task: Run no. 17: 2605 occurrences found in 0,000142 s
+Single task: Run no. 18: 2605 occurrences found in 0,000124 s
+Single task: Run no. 19: 2605 occurrences found in 0,000119 s
+Single task: Run no. 20: 2605 occurrences found in 0,000118 s
+Single task: Run no. 21: 2605 occurrences found in 0,000131 s
+Single task: Run no. 22: 2605 occurrences found in 0,000123 s
+Single task: Run no. 23: 2605 occurrences found in 0,000130 s
+Single task: Run no. 24: 2605 occurrences found in 0,000126 s
+Single task: Run no. 25: 2605 occurrences found in 0,000124 s
+Single task: Run no. 26: 2605 occurrences found in 0,000123 s
+Single task: Run no. 27: 2605 occurrences found in 0,000126 s
+Single task: Run no. 28: 2605 occurrences found in 0,000125 s
+Single task: Run no. 29: 2605 occurrences found in 0,000126 s
+Single task: Run no. 30: 2605 occurrences found in 0,000125 s
+Single task: Run no. 31: 2605 occurrences found in 0,000311 s
+Single task: Run no. 32: 2605 occurrences found in 0,000125 s
+Single task: Run no. 33: 2605 occurrences found in 0,000122 s
+Single task: Run no. 34: 2605 occurrences found in 0,000125 s
+Single task: Run no. 35: 2605 occurrences found in 0,000197 s
+Single task: Run no. 36: 2605 occurrences found in 0,000132 s
+Single task: Run no. 37: 2605 occurrences found in 0,000124 s
+Single task: Run no. 38: 2605 occurrences found in 0,000127 s
+Single task: Run no. 39: 2605 occurrences found in 0,000131 s
+Single task: Run no. 40: 2605 occurrences found in 0,000085 s
+Single task: Run no. 41: 2605 occurrences found in 0,000086 s
+Single task: Run no. 42: 2605 occurrences found in 0,000079 s
+Single task: Run no. 43: 2605 occurrences found in 0,000078 s
+Single task: Run no. 44: 2605 occurrences found in 0,000077 s
+Single task: Run no. 45: 2605 occurrences found in 0,000081 s
+Single task: Run no. 46: 2605 occurrences found in 0,000084 s
+Single task: Run no. 47: 2605 occurrences found in 0,000079 s
+Single task: Run no. 48: 2605 occurrences found in 0,000081 s
+Single task: Run no. 49: 2605 occurrences found in 0,000077 s
+Single task (avg.): 0,000136 s
+Using  2 tasks: Run no.  0: 2605 occurrences found in 0,000462 s
+Using  2 tasks: Run no.  1: 2605 occurrences found in 0,000542 s
+Using  2 tasks: Run no.  2: 2605 occurrences found in 0,000364 s
+Using  2 tasks: Run no.  3: 2605 occurrences found in 0,000345 s
+Using  2 tasks: Run no.  4: 2605 occurrences found in 0,000339 s
+Using  2 tasks: Run no.  5: 2605 occurrences found in 0,000341 s
+Using  2 tasks: Run no.  6: 2605 occurrences found in 0,000343 s
+Using  2 tasks: Run no.  7: 2605 occurrences found in 0,000342 s
+Using  2 tasks: Run no.  8: 2605 occurrences found in 0,000358 s
+Using  2 tasks: Run no.  9: 2605 occurrences found in 0,000574 s
+Using  2 tasks: Run no. 10: 2605 occurrences found in 0,000352 s
+Using  2 tasks: Run no. 11: 2605 occurrences found in 0,000372 s
+Using  2 tasks: Run no. 12: 2605 occurrences found in 0,000342 s
+Using  2 tasks: Run no. 13: 2605 occurrences found in 0,000341 s
+Using  2 tasks: Run no. 14: 2605 occurrences found in 0,000338 s
+Using  2 tasks: Run no. 15: 2605 occurrences found in 0,000335 s
+Using  2 tasks: Run no. 16: 2605 occurrences found in 0,000335 s
+Using  2 tasks: Run no. 17: 2605 occurrences found in 0,000332 s
+Using  2 tasks: Run no. 18: 2605 occurrences found in 0,000332 s
+Using  2 tasks: Run no. 19: 2605 occurrences found in 0,000329 s
+Using  2 tasks: Run no. 20: 2605 occurrences found in 0,000331 s
+Using  2 tasks: Run no. 21: 2605 occurrences found in 0,000589 s
+Using  2 tasks: Run no. 22: 2605 occurrences found in 0,000350 s
+Using  2 tasks: Run no. 23: 2605 occurrences found in 0,000364 s
+Using  2 tasks: Run no. 24: 2605 occurrences found in 0,000302 s
+Using  2 tasks: Run no. 25: 2605 occurrences found in 0,000202 s
+Using  2 tasks: Run no. 26: 2605 occurrences found in 0,000139 s
+Using  2 tasks: Run no. 27: 2605 occurrences found in 0,000126 s
+Using  2 tasks: Run no. 28: 2605 occurrences found in 0,000126 s
+Using  2 tasks: Run no. 29: 2605 occurrences found in 0,000128 s
+Using  2 tasks: Run no. 30: 2605 occurrences found in 0,000134 s
+Using  2 tasks: Run no. 31: 2605 occurrences found in 0,000141 s
+Using  2 tasks: Run no. 32: 2605 occurrences found in 0,000132 s
+Using  2 tasks: Run no. 33: 2605 occurrences found in 0,000432 s
+Using  2 tasks: Run no. 34: 2605 occurrences found in 0,000138 s
+Using  2 tasks: Run no. 35: 2605 occurrences found in 0,000133 s
+Using  2 tasks: Run no. 36: 2605 occurrences found in 0,000141 s
+Using  2 tasks: Run no. 37: 2605 occurrences found in 0,000156 s
+Using  2 tasks: Run no. 38: 2605 occurrences found in 0,000151 s
+Using  2 tasks: Run no. 39: 2605 occurrences found in 0,000208 s
+Using  2 tasks: Run no. 40: 2605 occurrences found in 0,000144 s
+Using  2 tasks: Run no. 41: 2605 occurrences found in 0,000161 s
+Using  2 tasks: Run no. 42: 2605 occurrences found in 0,000151 s
+Using  2 tasks: Run no. 43: 2605 occurrences found in 0,000353 s
+Using  2 tasks: Run no. 44: 2605 occurrences found in 0,000163 s
+Using  2 tasks: Run no. 45: 2605 occurrences found in 0,000158 s
+Using  2 tasks: Run no. 46: 2605 occurrences found in 0,000154 s
+Using  2 tasks: Run no. 47: 2605 occurrences found in 0,000194 s
+Using  2 tasks: Run no. 48: 2605 occurrences found in 0,000188 s
+Using  2 tasks: Run no. 49: 2605 occurrences found in 0,000155 s
+Using  2 tasks (avg.): 0,000273 s
+Average speedup: 0,50
