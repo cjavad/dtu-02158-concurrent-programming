@@ -24,4 +24,18 @@ execution backend if necessary.
 
 Primarily just run `plot.sh`, otherwise run `plot_speedup.sh` for the last two results.
 
-For you convinence all of the smaller outputs can be found in `artifacts`
+For you convenience all the smaller outputs can be found in `artifacts` which have been generated with `artifacts.sh`
+
+As an example from this directory you could run
+
+```shell
+./scripts/search -W 2 -R 10 ./data/xtest.txt xxxx
+```
+
+To just run the program.
+
+```shell
+./scripts/plot.sh ./data/xtest.txt xxxx 1 1 -Es
+```
+
+To run the program and get the plots.
