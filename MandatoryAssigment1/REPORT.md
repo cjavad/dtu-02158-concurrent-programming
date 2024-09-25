@@ -276,7 +276,7 @@ is with 16 threads or greater, where when the number of tasks increases above th
 the performance continues to increase significantly. This could be because there are some threads that 
 get postponed by the OS scheduler and take longer to finish or some data inputs for tasks taking longer to 
 process than others, and splitting the data up into more tasks allows it to be better distributed based off
-of where there is free compute, allowing it to better adapt to the real world execution conditions of the program.
+of which threads are currently running, allowing it to better adapt to the real world execution conditions of the program.
 
 
 ## Conclusion
