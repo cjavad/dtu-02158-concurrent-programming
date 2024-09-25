@@ -3,6 +3,9 @@
 > Group 7:
 > 02158 Concurrent Programming
 
+> Technical University of Denmark -
+> 25/09/2024
+
 **Members:**
 
 | Study nr. | Name                       |
@@ -21,7 +24,7 @@ together with the pattern we've used for the search.
 | 100-0.txt   | Complete works of William Shakespeare |
 | xtest.txt   | Text from problem 2                   |
 
-Primarily the tests were run on a Ryzen 9 5900HX 8/16 3.3 GHz (4.6 GHz) laptop processor.
+Primarily the tests were run on a Ryzen 9 5900HX 8/16 3.3 GHz (4.6 GHz) laptop processor on Linux 6.11.
 
 For plots, we decided to go with gnuplot to automate the process of generating plots.
 See the attached GitHub repository for the scripts used to generate the
@@ -78,6 +81,7 @@ The number of occurences of `xxxx` found in `xtest.txt` is 2605 for all number
 of tasts in the range of `0..16` as expected.
 
 The following is the associated code.
+
 ```
 // Create list of tasks
 List<SearchTask> taskList = new ArrayList<SearchTask>();
@@ -264,21 +268,39 @@ Run on 24 core, 48 hyper-thread HPC node.
 
 ![](./images/problem-5-speedup.png)
 
-Running the program with the same number of threads as tasks showed a continuing increase in performance 
+Running the program with the same number of threads as tasks showed a continuing increase in performance
 when the task/thread count increased above the previous point where performance stopped increasing on the
 laptop CPU. This was expected and follows the same pattern previously seen, where the performance
-continues to increase as long as the CPU has enough hyper-threads. 
+continues to increase as long as the CPU has enough hyper-threads.
 
 Varying the number of tasks with the number of threads however leads to different results that aren't really seen
 that well in problem 4. It follows the same trend where the speedup increases based off of the minimum
-between the tasks and threads. Where it differs (or more correctly is much more visible in the data) 
-is with 16 threads or greater, where when the number of tasks increases above the number of threads, 
-the performance continues to increase significantly. This could be because there are some threads that 
-get postponed by the OS scheduler and take longer to finish or some data inputs for tasks taking longer to 
+between the tasks and threads. Where it differs (or more correctly is much more visible in the data)
+is with 16 threads or greater, where when the number of tasks increases above the number of threads,
+the performance continues to increase significantly. This could be because there are some threads that
+get postponed by the OS scheduler and take longer to finish or some data inputs for tasks taking longer to
 process than others, and splitting the data up into more tasks allows it to be better distributed based off
-of which threads are currently running, allowing it to better adapt to the real world execution conditions of the program.
-
+of which threads are currently running, allowing it to better adapt to the real world execution conditions of the
+program.
 
 ## Conclusion
 
-> TODO: Write this.
+The program we have measured and modeled on for this occasion is somewhat close to a 100% CPU busy program
+which means how fast it is really depends on the amount of CPU there is available.
+
+Using Java standard library features such as Threads and Futures we can express the given work load in a way that can be
+performed independently of each other, allowing primarily Java and our operating system to run more of our code at once.
+
+But as we've seen it does not nearly translate to running all of our code on all the theoretically available resources
+at
+once. Java is not capable of making pure CPU tasks concurrent on a single operating system thread,
+simply giving the single executor more work to do does not translate into the work being completed faster.
+
+Adding threads into the mix allows the operating system to schedule our code to run on the multiple cores many system
+have available to them, but even then CPUs can have less than advertised limits as hyper-threads share physical
+hardware components that the CPU schedules and manages for us.
+
+In general splitting our task up into parallel chunks allowed it to use more of the physical resources at once but not
+quite beyond that. It also seems that giving the CPU / OS more work to do lead to more work being done, although we
+cannot conclude this will continue indefinitely, preventing thread starvation by slightly overworking the threads before
+getting throttled seems to provide the best performance. 
