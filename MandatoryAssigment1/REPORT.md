@@ -250,10 +250,7 @@ so they'll be able to perform work as soon as they are allowed to.
 
 ## Problem 5
 
-
-> TODO: Write this.
-
-Ran on 48-core HPC node.
+Run on 24 core, 48 hyper-thread HPC node.
 
 | Parameter | Value                    |
 |-----------|--------------------------|
@@ -266,6 +263,21 @@ Ran on 48-core HPC node.
 | EXECUTOR  | Fixed                    |
 
 ![](./images/problem-5-speedup.png)
+
+Running the program with the same number of threads as tasks showed a continuing increase in performance 
+when the task/thread count increased above the previous point where performance stopped increasing on the
+laptop CPU. This was expected and follows the same pattern previously seen, where the performance
+continues to increase as long as the CPU has enough hyper-threads. 
+
+Varying the number of tasks with the number of threads however leads to unexpected results that don't
+match those from problem 4. It follows the same trend where the speedup increases based off of the minimum
+between the tasks and threads. Where it differs is with 16 threads or greater, where when the number of
+tasks increases above the number of threads, the performance continues to increase. This is surprising
+as the amount of work each thread has to do has not decreased, yet each thread finishes its work faster.
+This could be due to how the `Executer` is implemented, smaller memory allocations that don't require syscalls,
+or the JVM optimizing the code. However, we aren't sure as to why, and it would require further testing
+and knowledge that we lack.
+
 
 ## Conclusion
 
