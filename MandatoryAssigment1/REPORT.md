@@ -74,8 +74,8 @@ We want to split up the problem into smaller sub-problems that can be evaluated
 concurrently. To do this we split up the input range into `n` equally sized sub
 ranges, where `n` is the number of tasks. Each range overlaps the start of the
 next by exactly `p - 1` characters where `p` is the length of the pattern. If
-not for this overlap, the last `p - 1` possible occurences pattern in each
-range would be ignored.
+not for this overlap, the last `p - 1` possible occurences of the pattern in
+each range would be ignored.
 
 The number of occurences of `xxxx` found in `xtest.txt` is 2605 for all number
 of tasts in the range of `0..16` as expected.
@@ -101,12 +101,9 @@ for (var future : futures)
         result.addAll(future.get()); 
 ```
 
-We should expect the average runtime to scale linearly with the number of tasks
-but cap out at the number of physical cores on the system. This is generally
-what we see, however the speedup is not exactly one to one like expected. This
-is likely explained by the fact that runtimes are so short that the actual work
-doesn't dominate the runtime, and that the overhead incurred by spawning a task
-weighs against the speedup.
+We should expect to see no speedup, in fact, we should actually expect worse
+performance since the tasks aren't being run in parallel, and spawning tasks
+and switching contexts incurs some overhead. This is also what we see.
 
 | Parameter | Value      |
 |-----------|------------|
