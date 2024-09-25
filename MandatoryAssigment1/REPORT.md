@@ -269,14 +269,14 @@ when the task/thread count increased above the previous point where performance 
 laptop CPU. This was expected and follows the same pattern previously seen, where the performance
 continues to increase as long as the CPU has enough hyper-threads. 
 
-Varying the number of tasks with the number of threads however leads to unexpected results that don't
-match those from problem 4. It follows the same trend where the speedup increases based off of the minimum
-between the tasks and threads. Where it differs is with 16 threads or greater, where when the number of
-tasks increases above the number of threads, the performance continues to increase. This is surprising
-as the amount of work each thread has to do has not decreased, yet each thread finishes its work faster.
-This could be due to how the `Executer` is implemented, smaller memory allocations that don't require syscalls,
-or the JVM optimizing the code. However, we aren't sure as to why, and it would require further testing
-and knowledge that we lack.
+Varying the number of tasks with the number of threads however leads to different results that aren't really seen
+that well in problem 4. It follows the same trend where the speedup increases based off of the minimum
+between the tasks and threads. Where it differs (or more correctly is much more visible in the data) 
+is with 16 threads or greater, where when the number of tasks increases above the number of threads, 
+the performance continues to increase significantly. This could be because there are some threads that 
+get postponed by the OS scheduler and take longer to finish or some data inputs for tasks taking longer to 
+process than others, and splitting the data up into more tasks allows it to be better distributed based off
+of where there is free compute, allowing it to better adapt to the real world execution conditions of the program.
 
 
 ## Conclusion
