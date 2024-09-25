@@ -67,8 +67,17 @@ runs but found this combination made the most sense for accurate results.
 
 ## Problem 2
 
-> TODO: Explain this (Including how we ensure we get the correct results)
+We want to split up the problem into smaller sub-problems that can be evaluated
+concurrently. To do this we split up the input range into `n` equally sized sub
+ranges, where `n` is the number of tasks. Each range overlaps the start of the
+next by exactly `p - 1` characters where `p` is the length of the pattern. If
+not for this overlap, the last `p - 1` possible occurences pattern in each
+range would be ignored.
 
+The number of occurences of `xxxx` found in `xtest.txt` is 2605 for all number
+of tasts in the range of `0..16` as expected.
+
+The following is the associated code.
 ```
 // Create list of tasks
 List<SearchTask> taskList = new ArrayList<SearchTask>();
@@ -88,9 +97,12 @@ for (var future : futures)
         result.addAll(future.get()); 
 ```
 
-> TODO: Explain "Average speedup%" and how it is calculated and how we can use it.
-
-> TODO: Explain if the speedup we measured is what we expected. We are running multiple tasks on one thread.
+We should expect the average runtime to scale linearly with the number of tasks
+but cap out at the number of physical cores on the system. This is generally
+what we see, however the speedup is not exactly one to one like expected. This
+is likely explained by the fact that runtimes are so short that the actual work
+doesn't dominate the runtime, and that the overhead incurred by spawning a task
+weighs against the speedup.
 
 | Parameter | Value      |
 |-----------|------------|
