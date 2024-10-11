@@ -61,6 +61,32 @@ def run_search_speedup(
     ])
 
 
+def parse_output(p: str):
+    # Parse lines 'Single task: Run no. 47: 30553 occurrences found in 0,031074 s'
+    single_task_match = re.findall(r'Single task: Run no.\s*(\d+):\s*\d+ occurrences found in\s*([\d,]+) s', p,
+                                   re.MULTILINE)
+    # Map run no. and duration (parse comma as decimal separator)
+    single_task = [(int(a), float(b.replace(',', '.'))) for (a, b) in single_task_match]
+
+    # Parse lines 'Using  $TASKS tasks: Run no.  0: 30553 occurrences found in 0,032900 s'
+    multi_task_match = re.findall(r'Using\s*(\d+) tasks: Run no.\s*(\d+):\s*\d+ occurrences found in ([\d,]+) s', p,
+                                  re.MULTILINE)
+
+    multi_task_task_count = [int(a) for (a, _, _) in multi_task_match][0]
+    # Map run no., duration and number of tasks (parse comma as decimal separator)
+    multi_task = [(int(a), float(b.replace(',', '.'))) for (_, a, b) in multi_task_match]
+
+    # Parse line: Single task (avg.): 0,034048 s
+    single_task_avg_match = re.search(r'Single task \(avg.\):\s*([\d,]+) s', p)
+    single_task_avg = float(single_task_avg_match.group(1).replace(',', '.'))
+
+    # Parse line: Using 16 tasks (avg.): 0,006741 s
+    multi_task_avg_match = re.search(r'Using\s*(\d+) tasks \(avg.\):\s*([\d,]+) s', p)
+    multi_task_avg = float(multi_task_avg_match.group(2).replace(',', '.'))
+
+    return single_task, multi_task, multi_task_task_count, single_task_avg, multi_task_avg
+
+
 def run_search(
         pattern: str,
         warmup: int,
@@ -120,27 +146,7 @@ def run_search(
     if plot_name is None:
         return
 
-    # Parse lines 'Single task: Run no. 47: 30553 occurrences found in 0,031074 s'
-    single_task_match = re.findall(r'Single task: Run no.\s*(\d+):\s*\d+ occurrences found in\s*([\d,]+) s', p,
-                                   re.MULTILINE)
-    # Map run no. and duration (parse comma as decimal separator)
-    single_task = [(int(a), float(b.replace(',', '.'))) for (a, b) in single_task_match]
-
-    # Parse lines 'Using  $TASKS tasks: Run no.  0: 30553 occurrences found in 0,032900 s'
-    multi_task_match = re.findall(r'Using\s*(\d+) tasks: Run no.\s*(\d+):\s*\d+ occurrences found in ([\d,]+) s', p,
-                                  re.MULTILINE)
-
-    multi_task_task_count = [int(a) for (a, _, _) in multi_task_match][0]
-    # Map run no., duration and number of tasks (parse comma as decimal separator)
-    multi_task = [(int(a), float(b.replace(',', '.'))) for (_, a, b) in multi_task_match]
-
-    # Parse line: Single task (avg.): 0,034048 s
-    single_task_avg_match = re.search(r'Single task \(avg.\):\s*([\d,]+) s', p)
-    single_task_avg = float(single_task_avg_match.group(1).replace(',', '.'))
-
-    # Parse line: Using 16 tasks (avg.): 0,006741 s
-    multi_task_avg_match = re.search(r'Using\s*(\d+) tasks \(avg.\):\s*([\d,]+) s', p)
-    multi_task_avg = float(multi_task_avg_match.group(2).replace(',', '.'))
+    single_task, multi_task, multi_task_task_count, single_task_avg, multi_task_avg = parse_output(p)
 
     # Write output as plot_name.txt
     with open(ARTIFACT_DIR / (plot_name + '.txt'), 'w') as f:
@@ -162,30 +168,91 @@ def run_search(
         ])
 
 
-# Long pattern from 02hgp10.txt
-long_pattern = "CACGCCTGTAATCTCAGTATTTTGGGAGGCTGAGATGGGTGGATCACCAGAGGTCAGGAG\r\nTTCGGGACCAGCCTGTCCAATATGGTAAAACCCCGTCTCTACTAAAAATCTGCTCCCCCC"
-warmups = 5
-runs = 10
+def combine_plots(plot_legend: str, plot_name: str, plot_single=False, *outputs: str):
+    with tempfile.NamedTemporaryFile(mode='w') as plotfile, tempfile.NamedTemporaryFile(mode='w') as line_names_file:
+        # Offset to give gnuplot script.
+        l = None
+        line_names = []
 
-"""
-problem2 = functools.partial(run_search, pattern=long_pattern, warmup=warmups, runs=runs, file=DATA_DIR / '02hgp10.txt',
-                             executor='s')
-problem2(ntasks=1, nthreads=1, plot_name="problem-2-multi-1", plot_single=False)
-problem2(ntasks=2, nthreads=1, plot_name="problem-2-multi-2", plot_single=False)
-problem2(ntasks=16, nthreads=1, plot_name="problem-2-multi-16", plot_single=False)
-problem3 = functools.partial(run_search, pattern=long_pattern, warmup=warmups, runs=runs, file=DATA_DIR / '02hgp10.txt',
-                             executor='c')
-problem3(ntasks=1, nthreads=1, plot_name="problem-3-1", plot_single=False)
-problem3(ntasks=2, nthreads=2, plot_name="problem-3-2", plot_single=False)
-problem3(ntasks=4, nthreads=4, plot_name="problem-3-4", plot_single=False)
-problem3(ntasks=16, nthreads=16, plot_name="problem-3-16", plot_single=False)
-"""
+        for output in outputs:
+            data = (ARTIFACT_DIR / (output + '.txt')).read_text()
+            # parse data
+            single_task, multi_task, multi_task_task_count, single_task_avg, multi_task_avg = parse_output(data)
+            tasks = (single_task if plot_single else multi_task)
 
-run_search_speedup(
-    long_pattern,
-    5, 10,
-    DATA_DIR / '02hgp10.txt',
-    'f',
-    max_thread_n=7,
-    plot_name="problem5"
-)
+            if l is None:
+                l = len(tasks)
+
+            assert (l == len(tasks))
+
+            for run, duration in tasks:
+                plotfile.write(f'{run} {duration}\n')
+
+            line_names.append(f"{multi_task_task_count}-tasks")
+
+        plotfile.flush()
+
+        line_names_file.write(' '.join(line_names) + '\n')
+
+        line_names_file.flush()
+
+        subprocess.check_output([
+            'gnuplot',
+            '-c',
+            str(SCRIPT_DIR / 'plot_multiple.gp'),
+            str(plotfile.name),
+            str(ARTIFACT_DIR / (plot_name + '.png')),
+            str(line_names_file.name),
+            str(l),
+            str(len(line_names)),
+            plot_legend
+        ])
+
+
+def generate_artifacts():
+    # Long pattern from 02hgp10.txt
+    long_pattern = "CACGCCTGTAATCTCAGTATTTTGGGAGGCTGAGATGGGTGGATCACCAGAGGTCAGGAG\r\nTTCGGGACCAGCCTGTCCAATATGGTAAAACCCCGTCTCTACTAAAAATCTGCTCCCCCC"
+    warmups = 5
+    runs = 10
+
+    problem2 = functools.partial(run_search, pattern=long_pattern, warmup=warmups, runs=runs,
+                                 file=DATA_DIR / '02hgp10.txt',
+                                 executor='s')
+    problem2(ntasks=1, nthreads=1, plot_name="problem-2-multi-1", plot_single=False)
+    problem2(ntasks=2, nthreads=1, plot_name="problem-2-multi-2", plot_single=False)
+    problem2(ntasks=16, nthreads=1, plot_name="problem-2-multi-16", plot_single=False)
+
+    problem3 = functools.partial(run_search, pattern=long_pattern, warmup=warmups, runs=runs,
+                                 file=DATA_DIR / '02hgp10.txt',
+                                 executor='c')
+    problem3(ntasks=1, nthreads=1, plot_name="problem-3-1", plot_single=False)
+    problem3(ntasks=2, nthreads=2, plot_name="problem-3-2", plot_single=False)
+    problem3(ntasks=4, nthreads=4, plot_name="problem-3-4", plot_single=False)
+    problem3(ntasks=16, nthreads=16, plot_name="problem-3-16", plot_single=False)
+    problem3(ntasks=32, nthreads=32, plot_name="problem-3-32", plot_single=False)
+    problem3(ntasks=64, nthreads=64, plot_name="problem-3-64", plot_single=False)
+    problem3(ntasks=128, nthreads=128, plot_name="problem-3-128", plot_single=False)
+
+    run_search_speedup(
+        long_pattern,
+        5, 10,
+        DATA_DIR / '02hgp10.txt',
+        'f',
+        plot_name="problem4"
+    )
+
+    # To be run on HPC node.
+    run_search_speedup(
+        long_pattern,
+        5, 10,
+        DATA_DIR / '02hgp10.txt',
+        'f',
+        max_task_n=9,
+        max_thread_n=7,
+        plot_name="problem5"
+    )
+
+
+combine_plots("Single Executor with multiple tasks", "problem-2-multi", False, "problem-2-multi-1", "problem-2-multi-2", "problem-2-multi-16")
+combine_plots("Cached executor with multiple tasks", "problem-3-multi", False, "problem-3-1", "problem-3-2", "problem-3-4", "problem-3-16", "problem-3-32",
+              "problem-3-64", "problem-3-128")

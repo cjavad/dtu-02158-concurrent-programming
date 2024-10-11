@@ -1,0 +1,35 @@
+
+File=/home/javad/School/concurrent/dtu-02158-concurrent-programming/MandatoryAssigment1/data/02hgp10.txt, length=6574259, pattern='CACGCCTGTAATCTCAGTATTTTGGGAGGCTGAGATGGGTGGATCACCAGAGGTCAGGAG
+TTCGGGACCAGCCTGTCCAATATGGTAAAACCCCGTCTCTACTAAAAATCTGCTCCCCCC'
+ntasks=2, nthreads=1, warmups=5, runs=10
+executor: SINGLE
+
+Single task: Run no.  0: 1 occurrences found in 1,499810 s
+Single task: Run no.  1: 1 occurrences found in 1,493193 s
+Single task: Run no.  2: 1 occurrences found in 1,505341 s
+Single task: Run no.  3: 1 occurrences found in 1,495644 s
+Single task: Run no.  4: 1 occurrences found in 1,505567 s
+Single task: Run no.  5: 1 occurrences found in 1,504451 s
+Single task: Run no.  6: 1 occurrences found in 1,495461 s
+Single task: Run no.  7: 1 occurrences found in 1,524859 s
+Single task: Run no.  8: 1 occurrences found in 1,493205 s
+Single task: Run no.  9: 1 occurrences found in 1,490942 s
+
+Single task (avg.): 1,500847 s
+
+Using  2 tasks: Run no.  0: 1 occurrences found in 1,505595 s
+Using  2 tasks: Run no.  1: 1 occurrences found in 1,493306 s
+Using  2 tasks: Run no.  2: 1 occurrences found in 1,484259 s
+Using  2 tasks: Run no.  3: 1 occurrences found in 1,506743 s
+Using  2 tasks: Run no.  4: 1 occurrences found in 1,527815 s
+Using  2 tasks: Run no.  5: 1 occurrences found in 1,534113 s
+Using  2 tasks: Run no.  6: 1 occurrences found in 1,516257 s
+Using  2 tasks: Run no.  7: 1 occurrences found in 1,508714 s
+Using  2 tasks: Run no.  8: 1 occurrences found in 1,532496 s
+Using  2 tasks: Run no.  9: 1 occurrences found in 1,514440 s
+
+Using  2 tasks (avg.): 1,512374 s
+
+
+Average speedup: 0,99
+
