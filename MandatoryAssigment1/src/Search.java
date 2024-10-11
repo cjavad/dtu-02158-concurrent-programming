@@ -271,9 +271,15 @@ public class Search {
             // Create list of tasks
             List<SearchTask> taskList = new ArrayList<SearchTask>();
 
-            for (int i = 0; i < ntasks; i++) {
-                int from = i * len / ntasks;
-                int to = (i + 1) * len / ntasks;
+            // If you, for some god forsaken reason, run the program with more
+            // tasks than characters in the input, we will limit the number of
+            // tasks to the theoretical maximum number of occurences...
+            int usefulLen = len - pattern.length + 1;
+            int usefulTasks = Math.min(ntasks, usefulLen);
+
+            for (int i = 0; i < usefulTasks; i++) {
+                int from = i * usefulLen / usefulTasks;
+                int to = (i + 1) * usefulLen / usefulTasks;
                 int realTo = Math.min(to + pattern.length - 1, len);
                 taskList.add(new SearchTask(text, pattern, from, realTo));
             }
