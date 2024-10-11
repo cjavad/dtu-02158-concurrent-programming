@@ -108,6 +108,7 @@ We should expect to see no speedup, in fact, we should actually expect worse per
 run in parallel, and spawning tasks and switching contexts incurs some overhead. This is also what we see.
 
 ![](./artifacts/problem-2-multi.png)
+![](./artifacts/problem-2-speedup.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -119,6 +120,7 @@ different stack contexts the CPU can keep track of at once) simple math might di
 least 8x.
 
 ![](./artifacts/problem-3-multi.png)
+![](./artifacts/problem-3-speedup.png)
 
 Comparing the speedup of 1 task vs 2 tasks we see an approximate speedup of 1.5x,
 this is a bit less than the expected 2x speedup so how come?
@@ -167,7 +169,7 @@ so they'll be able to perform work as soon as they are allowed to.
 
 Run on 24 core, 48 hyper-thread HPC node.
 
-![](./artifacts/problem-5-temp.png)
+![](./artifacts/problem5.png)
 
 Running the program with the same number of threads as tasks showed a continuing increase in performance when the
 task/thread count increased above the previous point where performance stopped increasing on the laptop CPU. This was

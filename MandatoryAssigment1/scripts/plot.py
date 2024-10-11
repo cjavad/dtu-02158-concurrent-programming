@@ -1,4 +1,5 @@
 import functools
+import math
 import re
 import shutil
 import subprocess
@@ -62,6 +63,7 @@ def run_search_speedup(
         str(ARTIFACT_DIR / (plot_name + '.png')),
         str(max_task_n),
         str(max_thread_n),
+        "Speedup vs Tasks for Different Threads",
     ])
 
 
@@ -213,6 +215,33 @@ def combine_plots(plot_legend: str, plot_name: str, plot_single=False, *outputs:
         ])
 
 
+def combine_plots_speedup(plot_legend: str, plot_name: str, plot_single=False, *outputs: str):
+    with tempfile.NamedTemporaryFile(mode='w') as plotfile:
+        highest_tasks_count = 0
+
+        for output in outputs:
+            data = (ARTIFACT_DIR / (output + '.txt')).read_text()
+            speedup_match = re.search(r'Average speedup:\s*([\d,]+)', data)
+            speedup = float(speedup_match.group(1).replace(',', '.'))
+            single_task, multi_task, multi_task_task_count, single_task_avg, multi_task_avg = parse_output(data)
+            highest_tasks_count = max(multi_task_task_count, highest_tasks_count)
+
+            plotfile.write(f'{multi_task_task_count} 1 {speedup}\n')
+
+        plotfile.flush()
+
+        subprocess.check_output([
+            'gnuplot',
+            '-c',
+            str(SCRIPT_DIR / 'speedup.gp'),
+            str(plotfile.name),
+            str(ARTIFACT_DIR / (plot_name + '.png')),
+            str(math.ceil(math.log2(highest_tasks_count))),
+            str(1),
+            plot_legend
+        ])
+
+
 def generate_artifacts():
     # Long pattern from 02hgp10.txt
     long_pattern = "CACGCCTGTAATCTCAGTATTTTGGGAGGCTGAGATGGGTGGATCACCAGAGGTCAGGAG\r\nTTCGGGACCAGCCTGTCCAATATGGTAAAACCCCGTCTCTACTAAAAATCTGCTCCCCCC"
@@ -262,12 +291,24 @@ def generate_artifacts():
         plot_name="problem5"
     )
 
+
 if __name__ == "__main__":
     build_java_program()
 
     generate_artifacts()
 
-    combine_plots("Single Executor with multiple tasks", "problem-2-multi", False, "problem-2-multi-1", "problem-2-multi-2",
+    combine_plots("Single Executor with multiple tasks", "problem-2-multi", False, "problem-2-multi-1",
+                  "problem-2-multi-2",
                   "problem-2-multi-16")
-    combine_plots("", "problem-3-multi", False, "problem-3-1", "problem-3-2", "problem-3-4", "problem-3-16", "problem-3-32",
+    combine_plots("", "problem-3-multi", False, "problem-3-1", "problem-3-2", "problem-3-4", "problem-3-16",
+                  "problem-3-32",
                   "problem-3-64", "problem-3-128")
+
+    combine_plots_speedup("Speedup for single executor with multiple tasks", "problem-2-speedup", False,
+                          "problem-2-multi-1",
+                          "problem-2-multi-2",
+                          "problem-2-multi-16")
+
+    combine_plots_speedup("Speedup for cached executor with multiple tasks", "problem-3-speedup", False,
+                          "problem-3-1", "problem-3-2", "problem-3-4", "problem-3-16", "problem-3-32",
+                          "problem-3-64", "problem-3-128")
