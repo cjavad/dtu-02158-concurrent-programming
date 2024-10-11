@@ -3,9 +3,6 @@
 SCRIPTDIR=$(dirname $0)
 cd $SCRIPTDIR/../
 
-TASK_N=9 # Calculate as 2^x, where x is the number of tasks starting from 0 to 7
-THREAD_N=7 # Calculate as 2^x, where x is the number of threads starting from 0 to 5
-
 truncate -s 0 speedup.txt
 
 for THREAD_I in $(seq 0 $(($THREAD_N-1))); do

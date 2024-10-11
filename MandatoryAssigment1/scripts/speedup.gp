@@ -14,7 +14,7 @@ set key left top
 set grid
 
 # Set x as power of 2
-set logscale x 2
+# set logscale x 2
 
 # Dynamic plot generation
 plot for [i=0:threads_count-1] datafile using 1:3 every ::(i*tasks_count)::((i+1)*tasks_count-1) title sprintf('Threads = %d', 2**i) with linespoints
