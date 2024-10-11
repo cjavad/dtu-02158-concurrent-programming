@@ -271,9 +271,9 @@ public class Search {
             // Create list of tasks
             List<SearchTask> taskList = new ArrayList<SearchTask>();
 
-            // If you, for some god forsaken reason, run the program with more
+            // If you, for whatever reason, run the program with more
             // tasks than characters in the input, we will limit the number of
-            // tasks to the theoretical maximum number of occurences...
+            // tasks to the maximum number of occurences.
             int usefulLen = len - pattern.length + 1;
             int usefulTasks = Math.min(ntasks, usefulLen);
 
