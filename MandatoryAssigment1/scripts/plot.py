@@ -39,6 +39,10 @@ def run_search_speedup(
         max_thread_n: int = 5,
         plot_name=None,
 ):
+    if plot_name and (ARTIFACT_DIR / (plot_name + '.png')).exists():
+        print(f"Skipping {plot_name} as it already exists")
+        return
+
     (DIR / "speedup.txt").unlink(missing_ok=True)
 
     for thread_i in range(0, max_thread_n):
@@ -215,6 +219,12 @@ def generate_artifacts():
     warmups = 5
     runs = 10
 
+    problem1 = functools.partial(run_search, pattern=long_pattern, runs=runs, file=DATA_DIR / '02hgp10.txt',
+                                 executor='s', ntasks=1, nthreads=1)
+
+    problem1(plot_name="problem-1-nowarmup", plot_single=True, warmup=0)
+    problem1(plot_name="problem-1-warmup", plot_single=True, warmup=warmups)
+
     problem2 = functools.partial(run_search, pattern=long_pattern, warmup=warmups, runs=runs,
                                  file=DATA_DIR / '02hgp10.txt',
                                  executor='s')
@@ -252,7 +262,12 @@ def generate_artifacts():
         plot_name="problem5"
     )
 
+if __name__ == "__main__":
+    build_java_program()
 
-combine_plots("Single Executor with multiple tasks", "problem-2-multi", False, "problem-2-multi-1", "problem-2-multi-2", "problem-2-multi-16")
-combine_plots("Cached executor with multiple tasks", "problem-3-multi", False, "problem-3-1", "problem-3-2", "problem-3-4", "problem-3-16", "problem-3-32",
-              "problem-3-64", "problem-3-128")
+    generate_artifacts()
+
+    combine_plots("Single Executor with multiple tasks", "problem-2-multi", False, "problem-2-multi-1", "problem-2-multi-2",
+                  "problem-2-multi-16")
+    combine_plots("", "problem-3-multi", False, "problem-3-1", "problem-3-2", "problem-3-4", "problem-3-16", "problem-3-32",
+                  "problem-3-64", "problem-3-128")
